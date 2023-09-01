@@ -21,7 +21,18 @@ export PATH=$TOOLPATH:$PATH
 
 echo "CMD: export PATH=$TOOLPATH:\$PATH"
 
-which ${COMPILER_PREFIX}gcc ${COMPILER_PREFIX}clang
+function check_comp_ver() {
+    local compiler=${1:-gcc}
+
+    which ${COMPILER_PREFIX}${compiler}
+    ${COMPILER_PREFIX}${compiler} --version
+}
+
+if [ "x$COMP" != "xgcc" ] ; then
+    COMP=clang
+fi
+
+check_comp_ver $COMP
 
 sleep 3
 
@@ -57,6 +68,7 @@ function run_test_suite() {
         errorlog "ERROR: $compiler : $suite FAIL, check $failtxt"
     else
         oklog "INFO: $compiler : $suite PASS"
+        rm -f $failtxt
     fi
 }
 

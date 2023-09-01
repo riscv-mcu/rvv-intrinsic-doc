@@ -87,7 +87,7 @@ function run_suites() {
     echo "INFO: API Testing on $compiler Done"
 }
 
-#run_suites $COMP
+run_suites $COMP
 
 failtxts=$(echo $(ls ${GENLOG}/fail_${COMP}_*.txt 2>/dev/null))
 # failtxts should contain valid paths if api testing is failing
@@ -95,4 +95,5 @@ if [[ "${failtxts}" =~ ^[[:space:]]*$ ]] ; then
     oklog "INFO: API Testing on $COMP All PASSED"
 else
     errorlog "ERROR: Please find fail patterns for $COMP in ${failtxts}"
+    echo "INFO: Zip it using command: zip -r ${COMP}_failtxt_$(date +%Y%m%d_%H%M).zip ${failtxts}"
 fi

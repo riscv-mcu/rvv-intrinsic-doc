@@ -16,7 +16,7 @@
 
 CFLAGS?=-O -Werror=implicit-function-declaration
 # rv64gcv_zfh_zvfh
-EXTRA_CFLAGS?=-march=rv64gcv_zvfh -mabi=lp64d -Wno-psabi #-menable-experimental-extensions
+EXTRA_CFLAGS?=-march=rv64gcv_zfh_zvfh -mabi=lp64d -Wno-psabi #-menable-experimental-extensions
 
 TEST_MULTILIB:=rv32gcv-ilp32d,rv64gcv-lp64d
 

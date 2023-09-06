@@ -28,7 +28,7 @@ function check_comp_ver() {
     ${COMPILER_PREFIX}${compiler} --version
 }
 
-if [ "x$COMP" != "xgcc" ] ; then
+if [[ $COMP != g* ]] ; then
     COMP=clang
 fi
 

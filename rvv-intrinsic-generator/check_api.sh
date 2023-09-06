@@ -56,7 +56,13 @@ function run_test_suite() {
     local compiler=${1:-gcc}
     local suite=${2:-api-testing}
 
-    local cmd="make COMPILER=${COMPILER_PREFIX}${compiler} run-${suite}"
+    local cc=$compiler
+    # see https://github.com/riscv-non-isa/rvv-intrinsic-doc/issues/241#issuecomment-1707806538
+    # see https://github.com/Incarnation-p-lee/rvv-intrinsic-doc/blob/5a986ba7d2c1ec54bce33f00e00625f8dd3a1319/check_intrinsic_api.sh#L37-L38
+    if [[ $suite == *overloaded* ]] && [ "x$compiler" == "xgcc" ] ; then
+        cc=g++
+    fi
+    local cmd="make COMPILER=${COMPILER_PREFIX}${cc} run-${suite}"
     echo "CMD: $cmd"
     local suitelog="$GENLOG/${compiler}_${suite}.log"
     eval $cmd > $suitelog 2>&1

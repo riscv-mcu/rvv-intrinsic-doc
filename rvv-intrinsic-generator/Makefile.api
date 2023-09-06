@@ -14,7 +14,7 @@
 # limitations under the License.
 ###############################################################################
 
-CFLAGS?=-O -Werror=implicit-function-declaration
+CFLAGS?=-O #-Werror=implicit-function-declaration
 # rv64gcv_zfh_zvfh
 EXTRA_CFLAGS?=-march=rv64gcv_zfh_zvfh -mabi=lp64d -Wno-psabi #-menable-experimental-extensions
 
